@@ -1,13 +1,16 @@
-.wrapper {
-  margin-top: 10px;
-  background-color: yellow;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+#quote-box {
+  padding: 10px;
+  color: blue;
+  background-color: paleturquoise;
 }
 
-.quote {
-  margin-top: 10px;
-  color: blue;
-  text-align: center;
+/* #wrapper {
+  border: 1px solid red;
+  width: 100%;
+  
+} */
+
+.inner {
+  display: table !important;
+  margin: 0 auto !important;
 }

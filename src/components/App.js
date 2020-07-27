@@ -1,49 +1,65 @@
 import React, { Component } from "react";
+import fetchQuotes from "../apis/quotesApi";
+import { Index } from "../logic/Index";
 
 import "./AppStyle.css";
 
 class App extends Component {
   state = {
     quotes: [],
-    selectedQuote: "",
+    selectedQuoteText: "",
+    selectedQuoteAuthor: "",
   };
 
   handleClick = () => {
-    //console.log("button clicked");
+    this.quoteSelector();
+  };
+
+  componentDidMount = () => {
+    document.body.style.backgroundColor = "paleturquoise";
+    const index = Index(9);
+    fetchQuotes.get("/quotes").then((response) =>
+      this.setState({
+        quotes: response.data,
+        selectedQuoteText: response.data[index].text,
+        selectedQuoteAuthor: response.data[index].author,
+      })
+    );
   };
 
   quoteSelector = () => {
     if (this.state.quotes[0]) {
-      let index = Math.floor(Math.random() * this.state.quotes.length) + 1;
-      console.log(index);
+      const index = Index(this.state.quotes.length);
+      const { text, author } = this.state.quotes[index];
+      this.setState({ selectedQuoteText: text, selectedQuoteAuthor: author });
     }
-  };
-
-  componentDidMount = () => {
-    fetch("https://type.fit/api/quotes")
-      .then((response) => response.json())
-      .then((data) => this.setState({ quotes: data }));
   };
 
   render() {
     return (
-      <div className="wrapper">
-        <div className="ui container quote">
-          <div className="ui card">
-            <div className="content">
-              <h2 id="text" className="center aligned header">
-                This is the quote
-              </h2>
-              <p id="author" className="right aligned author">
-                author
-              </p>
-              <button
-                onClick={this.handleClick}
-                className="ui button right floated"
-                id="new quote"
-              >
-                New Quote
-              </button>
+      <div id="wrapper">
+        <div className="inner" id="quote-box">
+          <div className="ui grid">
+            <div className="ui row">
+              <div className="ten wide column centered ">
+                <div className="ui card">
+                  <div className="content">
+                    <h2 id="text" className="center aligned header">
+                      {this.state.selectedQuoteText}
+                    </h2>
+                    <p id="author" className="right aligned author">
+                      {this.state.selectedQuoteAuthor}
+                    </p>
+                    <button
+                      onClick={this.handleClick}
+                      className="ui button right floated secondary"
+                      id="new quote"
+                    >
+                      New Quote
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
