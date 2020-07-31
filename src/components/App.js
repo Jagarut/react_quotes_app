@@ -35,7 +35,7 @@ class App extends Component {
     }
   };
 
-  render() {
+  renderCardQuote() {
     return (
       <div id="wrapper">
         <div className="inner" id="quote-box">
@@ -50,13 +50,24 @@ class App extends Component {
                     <p id="author" className="right aligned author">
                       {this.state.selectedQuoteAuthor}
                     </p>
-                    <button
-                      onClick={this.handleClick}
-                      className="ui button right floated secondary"
-                      id="new quote"
-                    >
-                      New Quote
-                    </button>
+
+                    <div className="ui row">
+                      <a
+                        id="tweet-quote"
+                        className=" ui mini twitter button"
+                        target="_blank"
+                        href="https://twitter.com/intent/tweet?hashtags=quotes&related=freecodecamp&text=%22How%20wonderful%20it%20is%20that%20nobody%20need%20wait%20a%20single%20moment%20before%20starting%20to%20improve%20the%20world.%22%20Anne%20Frank"
+                      >
+                        <i className=" twitter icon"></i>
+                      </a>
+                      <div
+                        onClick={this.handleClick}
+                        className="ui mini button right floated secondary  six wide column"
+                        id="new quote"
+                      >
+                        New Quote
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -66,6 +77,10 @@ class App extends Component {
       </div>
     );
   }
-}
 
+  render() {
+    const card = this.renderCardQuote();
+    return card;
+  }
+}
 export default App;
