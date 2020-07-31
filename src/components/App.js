@@ -63,7 +63,7 @@ class App extends Component {
                       <div
                         onClick={this.handleClick}
                         className="ui mini button right floated secondary  six wide column"
-                        id="new quote"
+                        id="new-quote"
                       >
                         New Quote
                       </div>
